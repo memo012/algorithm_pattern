@@ -1,6 +1,8 @@
 package tbsort
 
+import "fmt"
 
+// 冒泡排序
 func BubbleSort(arr []int) {
 	for i := 0; i < len(arr)-1; i++ {
 		for j := 0; j < len(arr)-1-i; j++ {
@@ -9,6 +11,7 @@ func BubbleSort(arr []int) {
 			}
 		}
 	}
+	fmt.Println(arr)
 }
 
 
