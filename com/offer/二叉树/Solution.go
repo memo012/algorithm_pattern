@@ -89,6 +89,39 @@ func maxDepth(root *TreeNode) int {
 	return rightDepth + 1
 }
 
+// 二叉树的锯齿形层次遍历
+func zigzagLevelOrder(root *TreeNode) [][]int {
+	res := make([][]int, 0)
+	if root == nil {
+		return res
+	}
+	queue := make([]*TreeNode, 0)
+	queue = append(queue, root)
+	isLeftStart := true
+	for len(queue) > 0 {
+		width := len(queue)
+		list := make([]int, width)
+		for i := 0; i < width; i++ {
+			node := queue[i]
+			if node.Left != nil {
+				queue = append(queue, node.Left)
+			}
+			if node.Right != nil {
+				queue = append(queue, node.Right)
+			}
+			if isLeftStart {
+				list[i] = node.Val
+			} else {
+				list[width-1-i] = node.Val
+			}
+		}
+		res = append(res, list)
+		isLeftStart = !isLeftStart
+		queue = queue[width:]
+	}
+	return res
+}
+
 // 二叉搜索树的最近公共祖先
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	if p == nil || q == nil {
@@ -104,6 +137,39 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 		}
 	}
 	return nil
+}
+
+// 二叉树的层次遍历 II
+func levelOrderBottom(root *TreeNode) [][]int {
+	res := make([][]int, 0)
+	if root == nil {
+		return res
+	}
+	queue := make([]*TreeNode, 0)
+	queue = append(queue, root)
+	stack := make([][]int, 0)
+	for len(queue) > 0 {
+		width := len(queue)
+		list := make([]int, 0)
+		for i := 0; i < width; i++ {
+			node := queue[0]
+			queue = queue[1:]
+			list = append(list, node.Val)
+			if node.Left != nil {
+				queue = append(queue, node.Left)
+			}
+			if node.Right != nil {
+				queue = append(queue, node.Right)
+			}
+		}
+		stack = append(stack, list)
+	}
+	for len(stack) > 0 {
+		node := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		res = append(res, node)
+	}
+	return res
 }
 
 // 二叉树中和为某一值的路径
