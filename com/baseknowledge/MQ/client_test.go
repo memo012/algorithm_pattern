@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func TestClient(t *testing.T) {
+func TestClient(t *testing.T)  {
 	b := NewClient()
 	b.SetConditions(100)
 	var wg sync.WaitGroup
