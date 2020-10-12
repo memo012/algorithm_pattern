@@ -10,6 +10,7 @@ func main() {
 	// 将键值对保存到sync.Map
 	scene.Store("法师", 97)
 	scene.Store("老郑", 100)
+	scene.Store("老郑", 200)
 	scene.Store("兵哥", 200)
 	// 从sync.Map中根据键取值
 	fmt.Println(scene.Load("法师"))
