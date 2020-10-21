@@ -30,7 +30,7 @@ func (r *RecursiveMutex) Lock() {
 func (r *RecursiveMutex) Unlock()  {
 	gid := goid.Get()
 	if atomic.LoadInt64(&r.owner) != gid {
-		panic(fmt.Sprintf("wrong the owner(%d): %d!", m.owner, gid))
+		panic(fmt.Sprintf("wrong the owner(%d): %d!", r.owner, gid))
 	}
 	r.recursion--
 	if r.recursion != 0 {
@@ -52,7 +52,7 @@ func (r *RecursiveMutex) lockTwo(token int64) {
 }
 func (r *RecursiveMutex) UnlockTwo(token int64)  {
 	if atomic.LoadInt64(&r.owner) != token {
-		panic(fmt.Sprintf("wrong the owner(%d): %d!", m.token, token))
+		panic(fmt.Sprintf("wrong the owner(%d): %d!", token, token))
 	}
 	r.recursion--
 	if r.recursion != 0 {
