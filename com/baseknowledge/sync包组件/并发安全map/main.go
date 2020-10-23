@@ -5,7 +5,20 @@ import (
 	"sync"
 )
 
+const (
+	mutexLocked = 1 << iota // mutex is locked
+	mutexWoken
+	mutexStarving
+	mutexWaiterShift = iota
+)
+
 func main() {
+
+	fmt.Println(mutexLocked)
+	fmt.Println(mutexWoken)
+	fmt.Println(mutexStarving)
+	fmt.Println(mutexWaiterShift)
+
 	var scene sync.Map
 	// 将键值对保存到sync.Map
 	scene.Store("法师", 97)
