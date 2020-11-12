@@ -29,7 +29,7 @@ func (l *LoadBalance) GetHttpServerByRoundRobinWithWeight() string {
 		sum += l.Servers[i].Weight
 		if l.Index < sum {
 			server = l.Servers[i]
-			// 落到某个区间的位置为末位置-1 && 当前区间为末区间
+			// 落到某个区间的位置为末位置-1 && 当前区间不为末区间
 			if l.Index == sum-1 && i != len(l.Servers)-1 {
 				l.Index++
 			} else {
