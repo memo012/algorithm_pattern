@@ -33,6 +33,7 @@ func (m *Mutex) TryLock() bool {
 	}
 	return false
 }
+
 // 加入一个超时设置
 func (m *Mutex) LockTimeout(timeout time.Duration) bool {
 	timer := time.NewTimer(timeout)
@@ -40,7 +41,7 @@ func (m *Mutex) LockTimeout(timeout time.Duration) bool {
 	case <-m.ch:
 		timer.Stop()
 		return true
-	case <- timer.C:
+	case <-timer.C:
 	}
 	return false
 }
@@ -49,5 +50,3 @@ func (m *Mutex) LockTimeout(timeout time.Duration) bool {
 func (m *Mutex) IsLocked() bool {
 	return len(m.ch) == 0
 }
-
-
